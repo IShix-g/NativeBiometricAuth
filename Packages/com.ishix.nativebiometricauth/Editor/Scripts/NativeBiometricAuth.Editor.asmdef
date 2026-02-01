@@ -1,0 +1,24 @@
+{
+    "name": "NativeBiometricAuth.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2acfa458c92f74930b5ee229d9046845"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.google.external-dependency-manager",
+            "expression": "",
+            "define": "ENABLE_EDM4U"
+        }
+    ],
+    "noEngineReferences": false
+}

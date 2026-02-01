@@ -1,0 +1,43 @@
+{
+  "name": "com.ishix.nativebiometricauth",
+  "version": "1.0.0",
+  "displayName": "Native Biometric Auth",
+  "description": "Native biometric authentication (FaceID, TouchID, Fingerprint) for Unity. Easily implement 'Secret Mode' for enhanced privacy protection.",
+  "unity": "2022.3",
+  "author": {
+    "name": "IShix",
+    "url": "https://github.com/IShix-g"
+  },
+  "keywords": [
+    "biometrics",
+    "authentication",
+    "security",
+    "privacy",
+    "native",
+    "ios",
+    "android",
+    "macos",
+    "touchid",
+    "faceid",
+    "fingerprint",
+    "secret-mode",
+    "app-lock"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IShix-g/NativeBiometricAuth.git"
+  },
+  "url": "https://github.com/IShix-g/NativeBiometricAuth",
+  "documentationUrl": "https://github.com/IShix-g/NativeBiometricAuth",
+  "changelogUrl": "https://github.com/IShix-g/NativeBiometricAuth/releases",
+  "licensesUrl": "https://github.com/IShix-g/NativeBiometricAuth/blob/master/LICENSE",
+  "samples": [
+    {
+      "displayName": "SecretMode Sample",
+      "description": "Demonstrates the implementation of Secret Mode with biometric authentication.",
+      "path": "Samples~/SecretModeTest"
+    }
+  ],
+  "dependencies": {}
+}

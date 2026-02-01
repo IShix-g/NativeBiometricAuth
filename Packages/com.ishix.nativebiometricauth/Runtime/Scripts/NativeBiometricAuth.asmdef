@@ -1,0 +1,20 @@
+{
+    "name": "NativeBiometricAuth",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.google.external-dependency-manager",
+            "expression": "",
+            "define": "ENABLE_EDM4U"
+        }
+    ],
+    "noEngineReferences": false
+}
