@@ -1,51 +1,35 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Object = UnityEngine.Object;
 
 namespace NativeBiometricAuth
 {
-    internal sealed class PrefabSecretModeOverlayController : ISecretModeOverlayController, IDisposable
+    internal sealed class PrefabSecretModeObjectController : ISecretModeObjectController, IDisposable
     {
         bool _isDisposed;
         GameObject _object;
-        ISecretModeOverlay _overlayContent;
+        ISecretModeObject _objectContent;
 
-        public PrefabSecretModeOverlayController(GameObject prefab)
+        public PrefabSecretModeObjectController(GameObject prefab)
         {
-            if (string.IsNullOrEmpty(prefab.scene.name))
-            {
-                _object = CreateInternal(prefab);
-            }
-            else
-            {
-                _object = prefab;
-            }
-            _overlayContent = _object.GetComponent<ISecretModeOverlay>();
+            _object = string.IsNullOrEmpty(prefab.scene.name)
+                ? CreateInternal(prefab)
+                : prefab;
+            _objectContent = _object.GetComponent<ISecretModeObject>();
             Object.DontDestroyOnLoad(_object);
-            prefab.gameObject.SetActive(false);
+            Assert.IsNotNull(_objectContent, "ISecretModeObject component not found on the provided object/prefab.");
             Hide();
         }
 
-        public void Show() => _object.SetActive(true);
+        public void Show() => _objectContent.Show();
 
-        public void Hide() => _object.SetActive(false);
+        public void Hide() => _objectContent.Hide();
 
-        public void OnSuccess()
-        {
-            if (_overlayContent != null)
-            {
-                _overlayContent.OnSuccess();
-            }
-        }
+        public void OnSuccess() => _objectContent.OnSuccess();
 
-        public void OnFailure(BiometricFailureReason reason)
-        {
-            if (_overlayContent != null)
-            {
-                _overlayContent.OnFailure(reason);
-            }
-        }
+        public void OnFailure(BiometricFailureReason reason) => _objectContent.OnFailure(reason);
 
         GameObject CreateInternal(GameObject prefab) => Object.Instantiate(prefab);
 
@@ -58,7 +42,7 @@ namespace NativeBiometricAuth
             _isDisposed = true;
             Object.Destroy(_object);
             _object = null;
-            _overlayContent = null;
+            _objectContent = null;
         }
     }
 }

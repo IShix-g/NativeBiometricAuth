@@ -137,9 +137,9 @@ namespace NativeBiometricAuth
             ShowOverlay();
         }
 
-        void ShowOverlay() => SecretMode.OverlayController.Show();
+        void ShowOverlay() => SecretMode.ObjectController.Show();
 
-        void HideOverlay() => SecretMode.OverlayController.Hide();
+        void HideOverlay() => SecretMode.ObjectController.Hide();
 
         void StartAuthenticateNextFrame()
         {

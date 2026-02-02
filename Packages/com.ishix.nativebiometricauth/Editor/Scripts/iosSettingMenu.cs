@@ -33,8 +33,8 @@ namespace NativeBiometricAuth.Editor
             }
 
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("iOS Biometric Settings", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("These settings will be applied to the Xcode project.", MessageType.Info);
+            EditorGUILayout.LabelField("iOS Biometric Build Settings", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox("These settings will be applied to the generated Xcode project during the build process.", MessageType.Info);
             EditorGUILayout.Space();
 
             _serializedSettings.Update();

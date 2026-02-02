@@ -1,7 +1,7 @@
 
 namespace NativeBiometricAuth
 {
-    public interface ISecretModeOverlayController
+    public interface ISecretModeObjectController
     {
         void Show();
         void Hide();

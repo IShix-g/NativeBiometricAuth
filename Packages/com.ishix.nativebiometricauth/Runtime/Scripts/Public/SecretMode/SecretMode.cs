@@ -15,12 +15,12 @@ namespace NativeBiometricAuth
         public static bool IsInitialized { get; private set; }
         public static bool IsActive => Biometric.IsActive;
         public static bool IsAvailable => Biometric.IsAvailable(AllowDeviceCredential);
-        internal static ISecretModeOverlayController OverlayController => s_overlayController;
+        internal static ISecretModeObjectController ObjectController => s_objectController;
         internal static bool AllowDeviceCredential { get; private set; }
         internal static float ResumeGraceSeconds { get; private set; }
         
         static SecretModeController s_controller;
-        static ISecretModeOverlayController s_overlayController;
+        static ISecretModeObjectController s_objectController;
         static bool s_skipOverlayOnActivate;
 
         public static void Initialize(
@@ -30,29 +30,29 @@ namespace NativeBiometricAuth
             => InitializeInternal(overlayPrefab, null, allowDeviceCredential, resumeGraceSeconds);
 
         public static void Initialize(
-            ISecretModeOverlayController overlayController,
+            ISecretModeObjectController objectController,
             bool allowDeviceCredential = true,
             float resumeGraceSeconds = 10f)
-            => InitializeInternal(null, overlayController, allowDeviceCredential, resumeGraceSeconds);
+            => InitializeInternal(null, objectController, allowDeviceCredential, resumeGraceSeconds);
 
         static void InitializeInternal(
             GameObject overlayPrefab,
-            ISecretModeOverlayController overlayController,
+            ISecretModeObjectController objectController,
             bool allowDeviceCredential,
             float resumeGraceSeconds)
         {
             if (overlayPrefab == null
-                && overlayController == null)
+                && objectController == null)
             {
-                Debug.LogError("[NativeBiometricAuth] SecretMode.Initialize requires a prefab or overlayFactory.");
+                Debug.LogError("[NativeBiometricAuth] SecretMode.Initialize requires a prefab or ISecretModeObjectController.");
                 return;
             }
 
-            if (s_overlayController is IDisposable disposable)
+            if (s_objectController is IDisposable disposable)
             {
                 disposable.Dispose();
             }
-            s_overlayController = overlayController ?? new PrefabSecretModeOverlayController(overlayPrefab);
+            s_objectController = objectController ?? new PrefabSecretModeObjectController(overlayPrefab);
             AllowDeviceCredential = allowDeviceCredential;
             ResumeGraceSeconds = Mathf.Max(0f, resumeGraceSeconds);
 
@@ -73,18 +73,26 @@ namespace NativeBiometricAuth
             {
                 s_skipOverlayOnActivate = true;
             }
-            Biometric.SetActive(isActive, true, onSuccess, onFailure);
+            Biometric.SetActive(isActive, true, () =>
+            {
+                NotifyAuthenticateSuccess();
+                onSuccess?.Invoke();
+            }, reason =>
+            {
+                NotifyAuthenticateFailure(reason);
+                onFailure?.Invoke(reason);
+            });
         }
 
         internal static void NotifyAuthenticateSuccess()
         {
-            s_overlayController.OnSuccess();
+            s_objectController.OnSuccess();
             OnAuthenticateSuccess();
         }
 
         internal static void NotifyAuthenticateFailure(BiometricFailureReason reason)
         {
-            s_overlayController.OnFailure(reason);
+            s_objectController.OnFailure(reason);
             OnAuthenticateFailure(reason);
         }
         

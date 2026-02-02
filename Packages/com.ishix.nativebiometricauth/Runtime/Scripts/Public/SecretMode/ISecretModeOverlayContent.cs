@@ -1,12 +1,10 @@
 
 namespace NativeBiometricAuth
 {
-    /// <summary>
-    /// シークレットモードのオーバーレイプレハブにアタッチされたコンポーネントが
-    /// 認証結果を受け取るためのインターフェース。
-    /// </summary>
-    public interface ISecretModeOverlay
+    public interface ISecretModeObject
     {
+        void Show();
+        void Hide();
         void OnSuccess();
         void OnFailure(BiometricFailureReason reason);
     }
