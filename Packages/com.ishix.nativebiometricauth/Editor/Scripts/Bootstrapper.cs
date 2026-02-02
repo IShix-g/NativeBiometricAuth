@@ -31,6 +31,7 @@ namespace NativeBiometricAuth.Editor
 #else
             Edm4UInstaller.UpdateIfNeeded();
 #endif
+            BiometricSettings.LoadOrCreate();
         }
     }
 }

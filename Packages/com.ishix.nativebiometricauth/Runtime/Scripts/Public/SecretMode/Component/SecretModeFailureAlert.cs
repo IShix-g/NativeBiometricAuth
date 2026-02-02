@@ -17,7 +17,7 @@ namespace NativeBiometricAuth
             _button.onClick.AddListener(ManualHide);
         }
         
-        protected override void SetText(string message)
+        protected override void SetMessage(string message)
             => _text.text = message;
     }
 }

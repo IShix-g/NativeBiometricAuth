@@ -17,7 +17,7 @@ namespace NativeBiometricAuth
 
         CancellationTokenSource _cts;
 
-        protected abstract void SetText(string message);
+        protected abstract void SetMessage(string message);
         
         protected virtual void Start()
         {
@@ -33,7 +33,7 @@ namespace NativeBiometricAuth
                 _animator.Stop();
             }
 
-            SetText(message);
+            SetMessage(message);
             _parent.gameObject.SetActive(true);
             _animator.Play(
                 _group.alpha, 1f,
