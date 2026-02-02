@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7bd4fc498f7408196b513f9cdeb11b0, type: 3}
+  m_Name: Settings
+  m_EditorClassIdentifier: 
+  _defaultLanguage: 10
+  _messageConfigs:
+  - Language: 22
+    Inactive: "\u30A2\u30D7\u30EA\u306E\u8A2D\u5B9A\u3067\u751F\u4F53\u8A8D\u8A3C\u304C\u30AA\u30D5\u306B\u306A\u3063\u3066\u3044\u307E\u3059\u3002"
+    NotSupported: "\u304A\u4F7F\u3044\u306E\u7AEF\u672B\u306F\u751F\u4F53\u8A8D\u8A3C\u306B\u5BFE\u5FDC\u3057\u3066\u3044\u307E\u305B\u3093\u3002"
+    NotConfigured: "\u7AEF\u672B\u306E\u8A2D\u5B9A\u304B\u3089\u751F\u4F53\u8A8D\u8A3C\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+    Canceled: "\u8A8D\u8A3C\u304C\u30AD\u30E3\u30F3\u30BB\u30EB\u3055\u308C\u307E\u3057\u305F\u3002"
+    AuthenticationFailed: "\u8A8D\u8A3C\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002\u6642\u9593\u3092\u304A\u3044\u3066\u518D\u5EA6\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002"
+    SystemError: "\u4E00\u6642\u7684\u306A\u30A8\u30E9\u30FC\u304C\u767A\u751F\u3057\u307E\u3057\u305F\u3002\u7AEF\u672B\u3092\u518D\u8D77\u52D5\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+    UnexpectedError: "\u4E88\u671F\u305B\u306C\u30A8\u30E9\u30FC\u304C\u767A\u751F\u3057\u307E\u3057\u305F\u3002"
+  - Language: 10
+    Inactive: Biometric authentication is disabled in app settings.
+    NotSupported: This device does not support biometric authentication.
+    NotConfigured: Please set up biometrics in your device settings.
+    Canceled: Authentication was canceled.
+    AuthenticationFailed: Authentication failed. Please try again later.
+    SystemError: A system error occurred. Please restart your device.
+    UnexpectedError: An unexpected error occurred.
+  - Language: 40
+    Inactive: "\u5E94\u7528\u8BBE\u7F6E\u4E2D\u5DF2\u7981\u7528\u751F\u7269\u8BC6\u522B\u8EAB\u4EFD\u9A8C\u8BC1\u3002"
+    NotSupported: "\u6B64\u8BBE\u5907\u4E0D\u652F\u6301\u751F\u7269\u8BC6\u522B\u8EAB\u4EFD\u9A8C\u8BC1\u3002"
+    NotConfigured: "\u8BF7\u5728\u8BBE\u5907\u8BBE\u7F6E\u4E2D\u8BBE\u7F6E\u751F\u7269\u8BC6\u522B\u3002"
+    Canceled: "\u8EAB\u4EFD\u9A8C\u8BC1\u5DF2\u53D6\u6D88\u3002"
+    AuthenticationFailed: "\u8EAB\u4EFD\u9A8C\u8BC1\u5931\u8D25\u3002\u8BF7\u7A0D\u540E\u518D\u8BD5\u3002"
+    SystemError: "\u53D1\u751F\u7CFB\u7EDF\u9519\u8BEF\u3002\u8BF7\u91CD\u65B0\u542F\u52A8\u60A8\u7684\u8BBE\u5907\u3002"
+    UnexpectedError: "\u53D1\u751F\u610F\u5916\u9519\u8BEF\u3002"
+  - Language: 41
+    Inactive: "\u61C9\u7528\u7A0B\u5F0F\u8A2D\u5B9A\u4E2D\u5DF2\u7981\u7528\u751F\u7269\u8FA8\u8B58\u8EAB\u5206\u9A57\u8B49\u3002"
+    NotSupported: "\u6B64\u88DD\u7F6E\u4E0D\u652F\u63F4\u751F\u7269\u8FA8\u8B58\u8EAB\u5206\u9A57\u8B49\u3002"
+    NotConfigured: "\u8ACB\u5728\u88DD\u7F6E\u8A2D\u5B9A\u4E2D\u8A2D\u5B9A\u751F\u7269\u8FA8\u8B58\u3002"
+    Canceled: "\u8EAB\u5206\u9A57\u8B49\u5DF2\u53D6\u6D88\u3002"
+    AuthenticationFailed: "\u8EAB\u5206\u9A57\u8B49\u5931\u6557\u3002\u8ACB\u7A0D\u5F8C\u518D\u8A66\u3002"
+    SystemError: "\u767C\u751F\u7CFB\u7D71\u932F\u8AA4\u3002\u8ACB\u91CD\u65B0\u555F\u52D5\u60A8\u7684\u88DD\u7F6E\u3002"
+    UnexpectedError: "\u767C\u751F\u610F\u5916\u932F\u8AA4\u3002"
+  - Language: 23
+    Inactive: "\uC571 \uC124\uC815\uC5D0\uC11C \uC0DD\uCCB4 \uC778\uC99D\uC774 \uBE44\uD65C\uC131\uD654\uB418\uC5B4
+      \uC788\uC2B5\uB2C8\uB2E4."
+    NotSupported: "\uC774 \uAE30\uAE30\uB294 \uC0DD\uCCB4 \uC778\uC99D\uC744 \uC9C0\uC6D0\uD558\uC9C0
+      \uC54A\uC2B5\uB2C8\uB2E4."
+    NotConfigured: "\uAE30\uAE30 \uC124\uC815\uC5D0\uC11C \uC0DD\uCCB4 \uC778\uC99D\uC744
+      \uB4F1\uB85D\uD574 \uC8FC\uC138\uC694."
+    Canceled: "\uC778\uC99D\uC774 \uCDE8\uC18C\uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+    AuthenticationFailed: "\uC778\uC99D\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4.
+      \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4\uD574 \uC8FC\uC138\uC694."
+    SystemError: "\uC2DC\uC2A4\uD15C \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4.
+      \uAE30\uAE30\uB97C \uC7AC\uBD80\uD305\uD574 \uC8FC\uC138\uC694."
+    UnexpectedError: "\uC608\uAE30\uCE58 \uC54A\uC740 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4."
+  - Language: 14
+    Inactive: "L'authentification biom\xE9trique est d\xE9sactiv\xE9e dans les param\xE8tres
+      de l'application."
+    NotSupported: "Cet appareil ne prend pas en charge l'authentification biom\xE9trique."
+    NotConfigured: "Veuillez configurer la biom\xE9trie dans les param\xE8tres de
+      votre appareil."
+    Canceled: "L'authentification a \xE9t\xE9 annul\xE9e."
+    AuthenticationFailed: "L'authentification a \xE9chou\xE9. Veuillez r\xE9essayer
+      plus tard."
+    SystemError: "Une erreur syst\xE8me s'est produite. Veuillez red\xE9marrer votre
+      appareil."
+    UnexpectedError: Une erreur inattendue s'est produite.
+  - Language: 15
+    Inactive: Die biometrische Authentifizierung ist in den App-Einstellungen deaktiviert.
+    NotSupported: "Dieses Ger\xE4t unterst\xFCtzt keine biometrische Authentifizierung."
+    NotConfigured: "Bitte richten Sie die Biometrie in Ihren Ger\xE4teeinstellungen
+      ein."
+    Canceled: Authentifizierung wurde abgebrochen.
+    AuthenticationFailed: "Authentifizierung fehlgeschlagen. Bitte versuchen Sie
+      es sp\xE4ter noch einmal."
+    SystemError: "Ein Systemfehler ist aufgetreten. Bitte starten Sie Ihr Ger\xE4t
+      neu."
+    UnexpectedError: Ein unerwarteter Fehler ist aufgetreten.
+  - Language: 34
+    Inactive: "La autenticaci\xF3n biom\xE9trica est\xE1 desactivada en los ajustes
+      de la aplicaci\xF3n."
+    NotSupported: "Este dispositivo no admite la autenticaci\xF3n biom\xE9trica."
+    NotConfigured: "Configure la biometr\xEDa en los ajustes de su dispositivo."
+    Canceled: "Autenticaci\xF3n cancelada."
+    AuthenticationFailed: "Error de autenticaci\xF3n. Int\xE9ntelo de nuevo m\xE1s
+      tarde."
+    SystemError: Se produjo un error del sistema. Reinicie su dispositivo.
+    UnexpectedError: Se ha producido un error inesperado.
+  - Language: 36
+    Inactive: "\u0E01\u0E32\u0E23\u0E22\u0E37\u0E19\u0E22\u0E31\u0E19\u0E15\u0E31\u0E27\u0E15\u0E19\u0E14\u0E49\u0E27\u0E22\u0E0A\u0E35\u0E27\u0E21\u0E32\u0E15\u0E23\u0E16\u0E39\u0E01\u0E1B\u0E34\u0E14\u0E43\u0E0A\u0E49\u0E07\u0E32\u0E19\u0E43\u0E19\u0E01\u0E32\u0E23\u0E15\u0E31\u0E49\u0E07\u0E04\u0E48\u0E32\u0E41\u0E2D\u0E1B"
+    NotSupported: "\u0E2D\u0E38\u0E1B\u0E01\u0E23\u0E13\u0E4C\u0E19\u0E35\u0E49\u0E44\u0E21\u0E48\u0E23\u0E2D\u0E07\u0E23\u0E31\u0E1A\u0E01\u0E32\u0E23\u0E22\u0E37\u0E19\u0E22\u0E31\u0E19\u0E15\u0E31\u0E27\u0E15\u0E19\u0E14\u0E49\u0E27\u0E22\u0E0A\u0E35\u0E27\u0E21\u0E32\u0E15\u0E23"
+    NotConfigured: "\u0E42\u0E1B\u0E23\u0E14\u0E15\u0E31\u0E49\u0E07\u0E04\u0E48\u0E32\u0E0A\u0E35\u0E27\u0E21\u0E32\u0E15\u0E23\u0E43\u0E19\u0E01\u0E32\u0E23\u0E15\u0E31\u0E49\u0E07\u0E04\u0E48\u0E32\u0E2D\u0E38\u0E1B\u0E01\u0E23\u0E13\u0E4C\u0E02\u0E2D\u0E07\u0E04\u0E38\u0E13"
+    Canceled: "\u0E01\u0E32\u0E23\u0E22\u0E37\u0E19\u0E22\u0E31\u0E19\u0E15\u0E31\u0E27\u0E15\u0E19\u0E16\u0E39\u0E01\u0E22\u0E01\u0E40\u0E25\u0E34\u0E01"
+    AuthenticationFailed: "\u0E01\u0E32\u0E23\u0E22\u0E37\u0E19\u0E22\u0E31\u0E19\u0E15\u0E31\u0E27\u0E15\u0E19\u0E25\u0E49\u0E21\u0E40\u0E2B\u0E25\u0E27
+      \u0E42\u0E1B\u0E23\u0E14\u0E25\u0E2D\u0E07\u0E2D\u0E35\u0E01\u0E04\u0E23\u0E31\u0E49\u0E07\u0E43\u0E19\u0E20\u0E32\u0E22\u0E2B\u0E25\u0E31\u0E07"
+    SystemError: "\u0E40\u0E01\u0E34\u0E14\u0E02\u0E49\u0E2D\u0E1C\u0E34\u0E14\u0E1E\u0E25\u0E32\u0E14\u0E02\u0E2D\u0E07\u0E23\u0E30\u0E1A\u0E1A
+      \u0E42\u0E1B\u0E23\u0E14\u0E23\u0E35\u0E2A\u0E15\u0E32\u0E23\u0E4C\u0E17\u0E2D\u0E38\u0E1B\u0E01\u0E23\u0E13\u0E4C\u0E02\u0E2D\u0E07\u0E04\u0E38\u0E13"
+    UnexpectedError: "\u0E40\u0E01\u0E34\u0E14\u0E02\u0E49\u0E2D\u0E1C\u0E34\u0E14\u0E1E\u0E25\u0E32\u0E14\u0E17\u0E35\u0E48\u0E44\u0E21\u0E48\u0E04\u0E32\u0E14\u0E04\u0E34\u0E14"
