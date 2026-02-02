@@ -1,3 +1,4 @@
+
 using System;
 using System.Threading;
 using UnityEditor;
@@ -9,7 +10,7 @@ namespace NativeBiometricAuth.Editor
     {
         const string _gitInstallUrl = "https://github.com/googlesamples/unity-jar-resolver.git?path=upm#v1.2.187";
         const string _packagePath = "Packages/com.google.external-dependency-manager/";
-        const string _menuItemPath = "Window/Native Biometric Auth/Install Google External Dependency Manager";
+        public const string InstallMenuItemPath = "Window/Native Biometric Auth/Install Google External Dependency Manager";
         const string _updateMenuItemPath = "Window/Native Biometric Auth/Update Google External Dependency Manager";
         const string _guideMenuItemPath = "Window/Native Biometric Auth/Android Setup Guide";
         const string _dialogTitle = "Native Biometric Auth";
@@ -20,7 +21,7 @@ namespace NativeBiometricAuth.Editor
         static readonly PackageInstaller s_packageInstaller = new();
 
 #if !ENABLE_EDM4U
-        [MenuItem(_menuItemPath)]
+        [MenuItem(InstallMenuItemPath)]
         public static void InstallFromMenu() => Install();
 #else
         [MenuItem(_updateMenuItemPath)]
@@ -40,11 +41,7 @@ namespace NativeBiometricAuth.Editor
                     new[] { _gitInstallUrl },
                     s_tokenSource.Token
                 )
-                .Handled(() =>
-                {
-                    Debug.Log("[NativeBiometricAuth] EDM4U Installation Completed.");
-                    ShowSetupInstructions();
-                });
+                .Handled(() => Debug.Log("[NativeBiometricAuth] Google External Dependency Manager Installation Completed."));
         }
 
         public static void PromptInstallIfNeeded()
@@ -58,7 +55,14 @@ namespace NativeBiometricAuth.Editor
                 "Not Now"
             );
 
-            if (result) Install();
+            if (result)
+            {
+                Install();
+            }
+            else
+            {
+                Debug.LogWarning($"[NativeBiometricAuth] Installation canceled. You can install it later via '{InstallMenuItemPath}'.");
+            }
         }
 
         public static void UpdateIfNeeded()
@@ -110,6 +114,10 @@ namespace NativeBiometricAuth.Editor
                 s_tokenSource = new CancellationTokenSource();
                 s_packageInstaller.Install(new[] { _gitInstallUrl }, s_tokenSource.Token)
                     .ContinueOnMainThread(onSuccess: task => s_isNeedUpdateEdmVersion = false);
+            }
+            else
+            {
+                Debug.LogWarning($"[NativeBiometricAuth] Update canceled. You can update manually via '{_updateMenuItemPath}'.");
             }
         }
 

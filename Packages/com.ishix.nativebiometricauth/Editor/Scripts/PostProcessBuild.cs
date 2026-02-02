@@ -18,6 +18,10 @@ namespace NativeBiometricAuth.Editor
                 AddFaceIDUsageDescription(pathToBuiltProject);
                 Debug.Log("[NativeBiometricAuth] NSFaceIDUsageDescription added to Info.plist");
             }
+            else if(target == BuildTarget.Android)
+            {
+                CheckEdm4URequirement();
+            }
         }
 
         static void AddFrameworks(string pathToBuiltProject)
@@ -36,12 +40,25 @@ namespace NativeBiometricAuth.Editor
 
         static void AddFaceIDUsageDescription(string pathToBuiltProject)
         {
+            var config = IosBuildSettings.GetIosConfig();
             var plistPath = Path.Combine(pathToBuiltProject, "Info.plist");
             var plist = new PlistDocument();
             plist.ReadFromFile(plistPath);
             var rootDict = plist.root;
-            rootDict.SetString("NSFaceIDUsageDescription", "This app uses Face ID to unlock features securely.");
+            rootDict.SetString("NSFaceIDUsageDescription", config.NsFaceIDUsageDescription);
             File.WriteAllText(plistPath, plist.WriteToString());
+        }
+        
+        static void CheckEdm4URequirement()
+        {
+#if !ENABLE_EDM4U
+            var errorMessage = "[NativeBiometricAuth] Build Failed: Google External Dependency Manager (EDM4U) is required for Android builds.\n" +
+                               $"Please install it via '{Edm4UInstaller.InstallMenuItemPath}'.";
+            Debug.LogError(errorMessage);
+            throw new BuildPlayerWindow.BuildMethodException(errorMessage);
+#else
+            Debug.Log("[NativeBiometricAuth] EDM4U requirement check passed.");
+#endif
         }
     }
 }
