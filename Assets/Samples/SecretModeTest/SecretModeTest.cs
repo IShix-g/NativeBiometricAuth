@@ -1,8 +1,7 @@
 
 using UnityEngine;
-using NativeBiometricAuth;
 
-namespace RunTimeTest
+namespace NativeBiometricAuth.Samples
 {
     internal sealed class SecretModeTest : MonoBehaviour
     {
