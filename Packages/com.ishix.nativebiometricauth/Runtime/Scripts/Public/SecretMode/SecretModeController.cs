@@ -109,7 +109,9 @@ namespace NativeBiometricAuth
                 return;
             }
             _isAuthenticating = true;
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
             _ignoreNextResume = true;
+#endif
             Biometric.Authenticate(
                 () =>
                 {
