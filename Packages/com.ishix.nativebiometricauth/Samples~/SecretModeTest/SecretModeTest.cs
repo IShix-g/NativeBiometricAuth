@@ -40,8 +40,6 @@ namespace NativeBiometricAuth.Samples
             => Debug.Log("OnAuthenticateSuccess");
         
         void OnAuthenticateFailure(BiometricFailureReason reason)
-        {
-            Debug.Log("OnAuthenticateFailure: " + reason);
-        }
+            => Debug.Log("OnAuthenticateFailure: " + reason);
     }
 }
