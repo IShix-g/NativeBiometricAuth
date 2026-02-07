@@ -9,7 +9,7 @@ namespace NativeBiometricAuth.Editor
         IosBuildSettings _settings;
         SerializedObject _serializedSettings;
 
-        [MenuItem("Window/Native Biometric Auth/iOS Settings")]
+        [MenuItem("Window/Native Biometric Auth/iOS/Settings")]
         public static void ShowWindow()
         {
             var window = GetWindow<IosSettingsWindow>("Native Biometric Auth");
