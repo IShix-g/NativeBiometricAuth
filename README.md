@@ -25,7 +25,6 @@ In the Unity Editor, go to `Window > Package Manager > Add package from git URL.
 
 ```
 https://github.com/IShix-g/NativeBiometricAuth.git?path=Packages/com.ishix.nativebiometricauth#v1
-
 ```
 
 ## Quick Start
