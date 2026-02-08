@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NativeBiometricAuth.Editor
 {
-    public sealed class BiometricSettingsWindow : EditorWindow
+    internal sealed class BiometricSettingsWindow : EditorWindow
     {
         BiometricSettings _settings;
         SerializedObject _serializedSettings;

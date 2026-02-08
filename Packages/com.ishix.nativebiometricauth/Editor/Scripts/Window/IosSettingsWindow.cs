@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NativeBiometricAuth.Editor
 {
-    public sealed class IosSettingsWindow : EditorWindow
+    internal sealed class IosSettingsWindow : EditorWindow
     {
         IosBuildSettings _settings;
         SerializedObject _serializedSettings;
