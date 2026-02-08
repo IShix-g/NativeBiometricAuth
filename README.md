@@ -1,2 +1,207 @@
-# NativeBiometricAuth
-Native biometric authentication (FaceID, TouchID, Fingerprint) for Unity. Easily implement 'Secret Mode' for enhanced privacy protection.
+![Unity](https://img.shields.io/badge/Unity-2022.3%2B-black)
+
+[README - 日本語版](README_ja.md)
+
+# Native Biometric Auth
+
+A native biometric authentication library (FaceID, TouchID, Fingerprint) for Unity.
+It allows for the implementation of a "Secret Mode" to protect sensitive information within your app with minimal effort.
+
+<img alt="Biometric Authorization" src="Docs/ios.gif" width="400"/>
+
+## Requirements
+
+* **iOS**: 12.0+
+* **Android**: API Level 23 (6.0)+
+* **macOS**: 10.13+
+
+Supports biometric authentication simulation within the Unity Editor (Mac).
+
+## Getting Started
+
+### Installation (UPM)
+
+In the Unity Editor, go to `Window > Package Manager > Add package from git URL...` and enter the following URL:
+
+```
+https://github.com/IShix-g/NativeBiometricAuth.git?path=Packages/com.ishix.nativebiometricauth#v1
+
+```
+
+## Quick Start
+
+### 1. Import Samples
+
+In the Package Manager, select the `Native Biometric Auth` package and import the **SecretMode Sample**.
+
+`Window > Package Manager > Native Biometric Auth > Samples > SecretMode Sample`
+
+<img alt="localization" src="Docs/upm_samples.jpg" width="550"/>
+
+### 2. Check the Sample Scene
+
+Open and play `Samples/SecretMode Sample/SecretModeTest.unity`.
+
+* **macOS**: You can simulate biometric authentication while running in the Editor.
+* **Android**: Before testing on an actual device, please complete the "Android Settings" described below.
+
+## Secret Mode Specifications
+
+Secret Mode is a feature that triggers a lock UI and forces user authentication based on specific app states.
+
+### Workflow
+
+1. **Authentication Triggers**:
+* App launch (Cold Start)
+* Returning from background (Resume) ([`OnApplicationPause(false)`](https://www.google.com/search?q=%5Bhttps://docs.unity3d.com/6000.3/Documentation/ScriptReference/MonoBehaviour.OnApplicationPause.html%5D(https://docs.unity3d.com/6000.3/Documentation/ScriptReference/MonoBehaviour.OnApplicationPause.html)))
+
+
+2. **Authentication Process**:
+* Upon trigger detection, the **Lock UI** is immediately displayed at the front.
+* Requests OS-standard biometric authentication (FaceID / TouchID / Fingerprint, etc.).
+
+
+3. **State Transitions**:
+* **Success**: Hides the Lock UI and returns to the previous context.
+* **Failure**: Maintains the locked state.
+
+
+
+```mermaid
+graph LR
+    Start((App Launch / Resume)) --> ShowLock[Show Lock Screen]
+    ShowLock --> Auth{Biometric Auth Request}
+    
+    Auth -- Success --> HideLock[Hide Lock Screen]
+    HideLock --> AppReady((App Ready))
+    
+    Auth -- Failure --> LockWait[Maintain Lock Screen]
+    LockWait -- Retry --> Auth
+    LockWait -- Exit by User --> Terminate((Terminate App))
+
+```
+
+### Switching Modes (UI Components)
+
+Various components are provided to easily toggle Secret Mode on or off.
+
+* **[SecretModeToggle.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeToggle.cs)**: For `UI.Toggle`
+* **[SecretModeButton.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButton.cs)**: For `TextMeshPro` buttons
+* **[SecretModeButtonLegacy.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButtonLegacy.cs)**: For `UI.Button` (Legacy)
+
+> [!TIP]
+> To create your own switching logic, inherit from `SecretModeObserver`.
+
+### Lock UI Configuration
+
+The UI used for Secret Mode requires the following components:
+
+* **Overlay**: The main UI displayed during the lock state.
+* **Failure Alert**: An alert UI displayed when authentication fails.
+
+> [!TIP]
+> If you want to create a completely custom Lock UI, implement the `ISecretModeObject` interface.
+
+<img alt="localization" src="Docs/secretModeObject.jpg" width="500"/>
+
+---
+
+## Platform Settings
+
+### Android
+
+On Android, this library uses "External Dependency Manager for Unity (EDM4U)" to resolve the [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) dependency.
+
+1. **Install EDM4U**:
+   Run `Window > Native Biometric Auth > Android > Install Google External Dependency Manager`.
+2. **Setup**:
+   Open `Setup Guide` from the menu and complete the configuration.
+
+> [!IMPORTANT]
+> If EDM4U is already installed in your project, no further action is required.
+
+### iOS
+
+Set the `NSFaceIDUsageDescription` (the reason for using FaceID) added to `Info.plist`.
+
+`Window > Native Biometric Auth > iOS > Settings`
+
+* **Default**: `This app uses Face ID to unlock features securely.`
+
+<img alt="localization" src="Docs/ios_settings.jpg" width="500"/>
+
+---
+
+## Main API
+
+### Initialization
+
+Use the `SecretMode` class to perform initialization.
+
+| Parameter | Description | Default Value |
+| --- | --- | --- |
+| `overlayPrefab` | Prefab for the Lock UI implementing `ISecretModeObject` | Required |
+| `allowDeviceCredential` | Whether to allow passcode/pattern if biometrics are unavailable | `true` |
+| `resumeGraceSeconds` | Grace period (seconds) before requiring auth on resume | `10` |
+
+```csharp
+using NativeBiometricAuth;
+
+void Awake()
+{
+    if (!SecretMode.IsInitialized)
+    {
+        SecretMode.Initialize(
+            overlayPrefab: _overlayPrefab,
+            allowDeviceCredential: true,
+            resumeGraceSeconds: 10
+        );
+    }
+}
+
+```
+
+### Event Handling
+
+| Event Name | Description |
+| --- | --- |
+| OnSecretModeActiveChanged | Called when Secret Mode is enabled or disabled. |
+| OnAuthenticateSuccess | Called when biometric authentication succeeds. |
+| OnAuthenticateFailure | Called when biometric authentication fails. You can check the [failure reason](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs) via the argument. |
+
+```csharp
+using NativeBiometricAuth;
+
+void OnEnable()
+{
+    SecretMode.OnSecretModeActiveChanged += OnSecretModeActiveChanged;
+    SecretMode.OnAuthenticateSuccess += OnAuthenticateSuccess;
+    SecretMode.OnAuthenticateFailure += OnAuthenticateFailure;
+}
+
+void OnDisable()
+{
+    SecretMode.OnSecretModeActiveChanged -= OnSecretModeActiveChanged;
+    SecretMode.OnAuthenticateSuccess -= OnAuthenticateSuccess;
+    SecretMode.OnAuthenticateFailure -= OnAuthenticateFailure;
+}
+
+void OnSecretModeActiveChanged(bool isActive) => Debug.Log($"Secret Mode: {isActive}");
+void OnAuthenticateSuccess() => Debug.Log("Auth Success");
+void OnAuthenticateFailure(BiometricFailureReason reason) => Debug.Log($"Auth Failed: {reason}");
+
+```
+
+### Localization & Messages
+
+You can retrieve error messages based on [BiometricFailureReason](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs).
+
+```csharp
+var message = BiometricSettings.Instance.GetMessage(reason, Application.systemLanguage);
+
+```
+
+Default message templates can be customized here:
+`Window > Native Biometric Auth > Error Message Settings`
+
+<img alt="localization" src="Docs/error_message_setting.jpg" width="500"/>
