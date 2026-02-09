@@ -82,8 +82,8 @@ graph LR
 シークレットモードの有効/無効を切り替えるための各種コンポーネントを提供しています。
 
 * **[SecretModeToggle.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeToggle.cs)**: `UI.Toggle` 用
-* **[SecretModeButton.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButton.cs)**: `TextMeshPro` ボタン用
-* **[SecretModeButtonLegacy.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButtonLegacy.cs)**: `UI.Button` (Legacy) 用
+* **[SecretModeButton.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButton.cs)**: `UI.Button`用 `TextMeshPro`
+* **[SecretModeButtonLegacy.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButtonLegacy.cs)**: `UI.Button`用 `UI.Text`
 
 > [!TIP]
 > 独自の切り替えロジックを作成する場合は、`SecretModeObserver` を継承して実装してください。
@@ -92,8 +92,8 @@ graph LR
 
 シークレットモードで使用するUIには、以下のコンポーネントを設定します。
 
-* **Overlay**: ロック中に表示されるメインUI。
-* **Failure Alert**: 認証失敗時に表示される警告UI。
+* **Overlay**: ロック中に表示されるメインUI
+* **Failure Alert**: 認証失敗時に表示される警告UI
 
 > [!TIP]
 > 完全にカスタムしたロックUIを作成する場合は、`ISecretModeObject` インターフェースを実装してください。
@@ -109,9 +109,9 @@ graph LR
 Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) を解決するために「External Dependency Manager for Unity (EDM4U)」を使用します。
 
 1. **EDM4Uのインストール**:
-   `Window > Native Biometric Auth > Android > Install Google External Dependency Manager` を実行します。
+   `Window > Native Biometric Auth > Android > Install Google External Dependency Manager` を実行します
 2. **セットアップ**:
-   メニューの `Setup Guide` を開き、設定を完了させてください。
+   メニューの `Setup Guide` を開き、設定を完了させてください
 
 > [!IMPORTANT]
 > すでにプロジェクトに EDM4U が導入されている場合は、再インストールの必要はありません。
@@ -132,13 +132,13 @@ Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.and
 
 ### 初期化
 
-`SecretMode` クラスを使用して初期化を行います。
+`s` クラスを使用して初期化を行います。
 
 | パラメータ | 説明 | デフォルト値 |
-| --- | --- | --- |
-| `overlayPrefab` | `ISecretModeObject` を実装したロックUIのPrefab | 必須 |
+| --- | --- |--------|
+| `overlayPrefab` | `ISecretModeObject` を実装したロックUIのPrefab | -      |
 | `allowDeviceCredential` | 生体認証不可時にパスコード/パターン認証を許可するか | `true` |
-| `resumeGraceSeconds` | 復帰時に認証を免除する猶予時間（秒） | `10` |
+| `resumeGraceSeconds` | 復帰時に認証を免除する猶予時間（秒） | `10`   |
 
 ```csharp
 using NativeBiometricAuth;

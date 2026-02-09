@@ -85,8 +85,8 @@ graph LR
 Various components are provided to easily toggle Secret Mode on or off.
 
 * **[SecretModeToggle.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeToggle.cs)**: For `UI.Toggle`
-* **[SecretModeButton.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButton.cs)**: For `TextMeshPro` buttons
-* **[SecretModeButtonLegacy.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButtonLegacy.cs)**: For `UI.Button` (Legacy)
+* **[SecretModeButton.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButton.cs)**: For `UI.Button` `TextMeshPro`
+* **[SecretModeButtonLegacy.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/Component/SecretModeButtonLegacy.cs)**: For `UI.Button` `UI.Text`
 
 > [!TIP]
 > To create your own switching logic, inherit from `SecretModeObserver`.
@@ -138,10 +138,10 @@ Set the `NSFaceIDUsageDescription` (the reason for using FaceID) added to `Info.
 Use the `SecretMode` class to perform initialization.
 
 | Parameter | Description | Default Value |
-| --- | --- | --- |
-| `overlayPrefab` | Prefab for the Lock UI implementing `ISecretModeObject` | Required |
-| `allowDeviceCredential` | Whether to allow passcode/pattern if biometrics are unavailable | `true` |
-| `resumeGraceSeconds` | Grace period (seconds) before requiring auth on resume | `10` |
+| --- | --- |---------------|
+| `overlayPrefab` | Prefab for the Lock UI implementing `ISecretModeObject` | -             |
+| `allowDeviceCredential` | Whether to allow passcode/pattern if biometrics are unavailable | `true`        |
+| `resumeGraceSeconds` | Grace period (seconds) before requiring auth on resume | `10`          |
 
 ```csharp
 using NativeBiometricAuth;
