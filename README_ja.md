@@ -216,7 +216,7 @@ var message = BiometricSettings.Instance.GetMessage(reason, Application.systemLa
 | `allowDeviceCredential` | 生体認証が利用不可な際、デバイスの資格情報（パスコード/パターン等）を許可するか | - |
 | `authenticate` | 有効化の際、その場で生体認証（本人確認）を行うか | `true` |
 | `onSuccess` | 認証成功時のコールバック | `null` |
-| `onFailure` | 認証失敗時のコールバック。引数で[エラー理由](https://www.google.com/search?q=https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs)を取得可能 | `null` |
+| `onFailure` | 認証失敗時のコールバック。引数で[エラー理由](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs)を取得可能 | `null` |
 
 ```csharp
 using NativeBiometricAuth;
@@ -289,7 +289,7 @@ graph LR
 | --- | --- | --- |
 | `allowDeviceCredential` | 生体認証が利用不可な際、デバイスの資格情報（パスコード/パターン等）を許可するか | - |
 | `onSuccess` | 認証成功時のコールバック | `null` |
-| `onFailure` | 認証失敗時のコールバック。[BiometricFailureReason](https://www.google.com/search?q=https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs)で詳細を確認可能 | `null` |
+| `onFailure` | 認証失敗時のコールバック。[BiometricFailureReason](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs)で詳細を確認可能 | `null` |
 
 ```csharp
 using NativeBiometricAuth;

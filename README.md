@@ -219,7 +219,7 @@ Use this method to toggle the active state of biometric authentication within yo
 | `allowDeviceCredential` | Whether to allow Device Credentials (PIN, Pattern, Password) if biometrics are unavailable. | - |
 | `authenticate` | If `true`, triggers a biometric check immediately to verify the user before enabling. | `true` |
 | `onSuccess` | Callback invoked upon successful authentication. | `null` |
-| `onFailure` | Callback invoked upon failed authentication. Returns [BiometricFailureReason](https://www.google.com/search?q=https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs). | `null` |
+| `onFailure` | Callback invoked upon failed authentication. Returns [BiometricFailureReason](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs). | `null` |
 
 ```csharp
 using NativeBiometricAuth;
@@ -292,7 +292,7 @@ Manually trigger the biometric authentication dialog.
 | --- | --- | --- |
 | `allowDeviceCredential` | Whether to allow Device Credentials (PIN, Pattern, Password) as a fallback. | - |
 | `onSuccess` | Callback invoked upon successful authentication. | `null` |
-| `onFailure` | Callback invoked upon failed authentication. Returns [BiometricFailureReason](https://www.google.com/search?q=https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs). | `null` |
+| `onFailure` | Callback invoked upon failed authentication. Returns [BiometricFailureReason](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs). | `null` |
 
 ```csharp
 using NativeBiometricAuth;
