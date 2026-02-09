@@ -157,7 +157,6 @@ void Awake()
         );
     }
 }
-
 ```
 
 ### Event Handling
@@ -188,7 +187,6 @@ void OnDisable()
 void OnSecretModeActiveChanged(bool isActive) => Debug.Log($"Secret Mode: {isActive}");
 void OnAuthenticateSuccess() => Debug.Log("Auth Success");
 void OnAuthenticateFailure(BiometricFailureReason reason) => Debug.Log($"Auth Failed: {reason}");
-
 ```
 
 ### Localization & Messages
@@ -204,3 +202,110 @@ Default message templates can be customized here:
 `Window > Native Biometric Auth > Error Message Settings`
 
 <img alt="localization" src="Docs/error_message_setting.jpg" width="500"/>
+
+---
+
+## Standalone Biometric Authentication
+
+It is possible to use the biometric authentication features independently without using the "Secret Mode."
+
+### 1. Enabling / Disabling Biometrics
+
+Use this method to toggle the active state of biometric authentication within your application.
+
+| Parameter | Description | Default |
+| --- | --- | --- |
+| `value` | Set to `true` to enable, `false` to disable. | - |
+| `allowDeviceCredential` | Whether to allow Device Credentials (PIN, Pattern, Password) if biometrics are unavailable. | - |
+| `authenticate` | If `true`, triggers a biometric check immediately to verify the user before enabling. | `true` |
+| `onSuccess` | Callback invoked upon successful authentication. | `null` |
+| `onFailure` | Callback invoked upon failed authentication. Returns [BiometricFailureReason](https://www.google.com/search?q=https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs). | `null` |
+
+```csharp
+using NativeBiometricAuth;
+
+Biometric.SetActive(
+    value: isActive,
+    allowDeviceCredential: true,
+    authenticate: true,
+    onSuccess: () =>
+    {
+        NotifyAuthenticateSuccess();
+        onSuccess?.Invoke();
+    },
+    onFailure: reason =>
+    {
+        NotifyAuthenticateFailure(reason);
+        onFailure?.Invoke(reason);
+    });
+
+```
+
+### 2. Checking Status
+
+You can check the current activation state and hardware availability.
+
+```csharp
+using NativeBiometricAuth;
+
+// Returns the state set via SetActive.
+var isActive = Biometric.IsActive;
+
+// Checks if the device/OS supports biometric authentication.
+var isAvailable = Biometric.IsAvailable(allowDeviceCredential: true);
+
+```
+
+#### Detailed Availability Logic
+
+The underlying logic for determining availability can be complex depending on OS settings (e.g., hardware support vs. user enrollment). The following flow chart illustrates how `BiometricActivationState` is determined.
+
+```mermaid
+graph LR
+    Start([Start]) --> GetAvail[Get Availability]
+    GetAvail --> CheckAllow{allowDeviceCredential<br/>permitted?}
+
+    %% Allow Device Credential: True
+    CheckAllow -- true --> CondA{Biometrics OR Device<br/>Configured?}
+    CondA -- Yes --> Enabled([Enabled])
+    CondA -- No --> CondB{Biometrics OR Device<br/>Supported but Not Configured?}
+    CondB -- Yes --> NotConf([NotConfigured])
+    CondB -- No --> Disabled([Disabled])
+
+    %% Allow Device Credential: False
+    CheckAllow -- false --> CondC{Biometrics ONLY<br/>Configured?}
+    CondC -- Yes --> Enabled2([Enabled])
+    CondC -- No --> CondD{Biometrics ONLY<br/>Supported but Not Configured?}
+    CondD -- Yes --> NotConf2([NotConfigured])
+    CondD -- No --> Disabled2([Disabled])
+
+    style Enabled fill:#2ecc71,stroke:#27ae60,color:#fff
+    style Enabled2 fill:#2ecc71,stroke:#27ae60,color:#fff
+
+```
+
+### 3. Executing Authentication
+
+Manually trigger the biometric authentication dialog.
+
+| Parameter | Description | Default |
+| --- | --- | --- |
+| `allowDeviceCredential` | Whether to allow Device Credentials (PIN, Pattern, Password) as a fallback. | - |
+| `onSuccess` | Callback invoked upon successful authentication. | `null` |
+| `onFailure` | Callback invoked upon failed authentication. Returns [BiometricFailureReason](https://www.google.com/search?q=https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs). | `null` |
+
+```csharp
+using NativeBiometricAuth;
+
+Biometric.Authenticate(
+    allowDeviceCredential: true,
+    onSuccess: () =>
+    {
+        // Handle success
+    },
+    onFailure: reason =>
+    {
+        // Handle failure (e.g., user cancellation, lockout, etc.)
+    });
+
+```

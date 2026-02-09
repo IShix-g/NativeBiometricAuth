@@ -154,7 +154,6 @@ void Awake()
         );
     }
 }
-
 ```
 
 ### イベントハンドリング
@@ -163,7 +162,7 @@ void Awake()
 |---------------------------|---------------------------------------|
 | OnSecretModeActiveChanged | シークレットモードの有効/無効の切り替え時に呼ばれます |
 | OnAuthenticateSuccess | 生体認証が成功した際に呼ばれます |
-| OnAuthenticateFailure | 生体認証が失敗した際に呼ばれます。引数で[エラー内容](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs)を確認できます。 |
+| OnAuthenticateFailure | 生体認証が失敗した際に呼ばれます。引数で[エラー内容](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs)を確認できます |
 
 ```csharp
 using NativeBiometricAuth;
@@ -185,7 +184,6 @@ void OnDisable()
 void OnSecretModeActiveChanged(bool isActive) => Debug.Log($"Secret Mode: {isActive}");
 void OnAuthenticateSuccess() => Debug.Log("Auth Success");
 void OnAuthenticateFailure(BiometricFailureReason reason) => Debug.Log($"Auth Failed: {reason}");
-
 ```
 
 ### ローカライズ・メッセージ
@@ -201,3 +199,110 @@ var message = BiometricSettings.Instance.GetMessage(reason, Application.systemLa
 `Window > Native Biometric Auth > Error Message Settings`
 
 <img alt="localization" src="Docs/error_message_setting.jpg" width="500"/>
+
+---
+
+## 生体認証機能の利用
+
+シークレットモードを使用せず、純粋な生体認証機能のみをスタンドアロンで利用する際の手順です。
+
+### 1. 有効/無効の切り替え
+
+生体認証の有効状態を切り替えます。
+
+| 引数 | 説明 | 初期値 |
+| --- | --- | --- |
+| `value` | 有効化する場合は `true` 、無効化する場合は `false` | - |
+| `allowDeviceCredential` | 生体認証が利用不可な際、デバイスの資格情報（パスコード/パターン等）を許可するか | - |
+| `authenticate` | 有効化の際、その場で生体認証（本人確認）を行うか | `true` |
+| `onSuccess` | 認証成功時のコールバック | `null` |
+| `onFailure` | 認証失敗時のコールバック。引数で[エラー理由](https://www.google.com/search?q=https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs)を取得可能 | `null` |
+
+```csharp
+using NativeBiometricAuth;
+
+Biometric.SetActive(
+    value: isActive,
+    allowDeviceCredential: true,
+    authenticate: true,
+    onSuccess: () =>
+    {
+        NotifyAuthenticateSuccess();
+        onSuccess?.Invoke();
+    },
+    onFailure: reason =>
+    {
+        NotifyAuthenticateFailure(reason);
+        onFailure?.Invoke(reason);
+    });
+
+```
+
+### 2. 設定状態の確認
+
+現在の生体認証の設定状態を取得します。
+
+```csharp
+using NativeBiometricAuth;
+
+// 有効化されているか（SetActiveで設定した値）
+var isActive = Biometric.IsActive;
+
+// そもそもデバイスで生体認証が利用可能か
+var isAvailable = Biometric.IsAvailable(allowDeviceCredential: true);
+
+```
+
+#### 利用可能判定の詳細（GetActivationState）
+
+OS側の設定状況（未設定・未サポート等）に応じた詳細な判定フローは以下の通りです。
+
+```mermaid
+graph LR
+    Start([開始]) --> GetAvail[Availabilityを取得]
+    GetAvail --> CheckAllow{allowDeviceCredential<br/>パスコードを許可?}
+
+    %% Allow Device Credential: True
+    CheckAllow -- true --> CondA{生体 または デバイス<br/>が設定済み?}
+    CondA -- Yes --> Enabled([Enabled])
+    CondA -- No --> CondB{生体 または デバイス<br/>が未設定?}
+    CondB -- Yes --> NotConf([NotConfigured])
+    CondB -- No --> Disabled([Disabled])
+
+    %% Allow Device Credential: False
+    CheckAllow -- false --> CondC{生体のみが<br/>設定済み?}
+    CondC -- Yes --> Enabled2([Enabled])
+    CondC -- No --> CondD{生体のみが<br/>未設定?}
+    CondD -- Yes --> NotConf2([NotConfigured])
+    CondD -- No --> Disabled2([Disabled])
+
+    style Enabled fill:#2ecc71,stroke:#27ae60,color:#fff
+    style Enabled2 fill:#2ecc71,stroke:#27ae60,color:#fff
+
+```
+
+### 3. 生体認証の実行
+
+明示的に生体認証ダイアログを表示し、認証を行います。
+
+| 引数 | 説明 | 初期値 |
+| --- | --- | --- |
+| `allowDeviceCredential` | 生体認証が利用不可な際、デバイスの資格情報（パスコード/パターン等）を許可するか | - |
+| `onSuccess` | 認証成功時のコールバック | `null` |
+| `onFailure` | 認証失敗時のコールバック。[BiometricFailureReason](https://www.google.com/search?q=https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/Biometric/BiometricFailureReason.cs)で詳細を確認可能 | `null` |
+
+```csharp
+using NativeBiometricAuth;
+
+Biometric.Authenticate(
+    allowDeviceCredential: true,
+    onSuccess: () =>
+    {
+        // 成功時の処理
+    },
+    onFailure: reason =>
+    {
+        // 失敗時の処理
+    });
+
+```
