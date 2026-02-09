@@ -49,7 +49,7 @@ Package Managerの `Native Biometric Auth` 項目から **SecretMode Sample** �
 
 1. **認証トリガー**:
 * アプリ起動時（コールドスタート）
-* バックグラウンドからの復帰時（[`OnApplicationPause(false)`](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/MonoBehaviour.OnApplicationPause.html))）
+* バックグラウンドからの復帰時（[OnApplicationPause(false)](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/MonoBehaviour.OnApplicationPause.html))
 
 
 2. **認証プロセス**:

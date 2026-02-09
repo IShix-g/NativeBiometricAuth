@@ -52,7 +52,7 @@ Secret Mode is a feature that triggers a lock UI and forces user authentication 
 
 1. **Authentication Triggers**:
 * App launch (Cold Start)
-* Returning from background (Resume) ([`OnApplicationPause(false)`](https://www.google.com/search?q=%5Bhttps://docs.unity3d.com/6000.3/Documentation/ScriptReference/MonoBehaviour.OnApplicationPause.html%5D(https://docs.unity3d.com/6000.3/Documentation/ScriptReference/MonoBehaviour.OnApplicationPause.html)))
+* Returning from background (Resume) ([OnApplicationPause(false)](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/MonoBehaviour.OnApplicationPause.html))
 
 
 2. **Authentication Process**:
