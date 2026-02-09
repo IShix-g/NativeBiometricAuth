@@ -113,6 +113,7 @@ namespace NativeBiometricAuth
             _ignoreNextResume = true;
 #endif
             Biometric.Authenticate(
+                SecretMode.AllowDeviceCredential,
                 () =>
                 {
                     _lastResumedTime = DateTime.UtcNow;
@@ -125,8 +126,7 @@ namespace NativeBiometricAuth
                     _lastResumedTime = DateTime.UtcNow;
                     _isAuthenticating = false;
                     SecretMode.NotifyAuthenticateFailure(reason);
-                },
-                SecretMode.AllowDeviceCredential);
+                });
         }
 
         void ShowOverlayIfNeeded()

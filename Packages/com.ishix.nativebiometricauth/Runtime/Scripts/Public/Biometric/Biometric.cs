@@ -57,7 +57,7 @@ namespace NativeBiometricAuth
         
         public static BiometricAvailabilityStatus GetAvailability() => s_platform.GetAvailability();
         
-        public static void Authenticate(Action onSuccess, Action<BiometricFailureReason> onFailure, bool allowDeviceCredential = true)
+        public static void Authenticate(bool allowDeviceCredential, Action onSuccess = null, Action<BiometricFailureReason> onFailure = null)
         {
             if (!IsActive)
             {
