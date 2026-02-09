@@ -57,9 +57,6 @@ namespace NativeBiometricAuth
         
         public static BiometricAvailabilityStatus GetAvailability() => s_platform.GetAvailability();
         
-        public static void Authenticate(Action onSuccess, Action onFailure, bool allowDeviceCredential = true)
-            => Authenticate(onSuccess, _ => onFailure?.Invoke(), allowDeviceCredential);
-
         public static void Authenticate(Action onSuccess, Action<BiometricFailureReason> onFailure, bool allowDeviceCredential = true)
         {
             if (!IsActive)
@@ -132,7 +129,7 @@ namespace NativeBiometricAuth
             return s_isActive;
         }
 
-        public static void SetActive(bool value, bool authenticate = true, Action onSuccess = null, Action<BiometricFailureReason> onFailure = null)
+        public static void SetActive(bool value, bool allowDeviceCredential, bool authenticate = true, Action onSuccess = null, Action<BiometricFailureReason> onFailure = null)
         {
             var current = GetActive();
             if (value && !current)
@@ -159,7 +156,7 @@ namespace NativeBiometricAuth
                         s_isTogglingActive = false;
                         onFailure?.Invoke(reason);
                     },
-                    true);
+                    allowDeviceCredential);
             }
             else if (current != value)
             {

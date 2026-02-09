@@ -73,15 +73,19 @@ namespace NativeBiometricAuth
             {
                 s_skipOverlayOnActivate = true;
             }
-            Biometric.SetActive(isActive, true, () =>
-            {
-                NotifyAuthenticateSuccess();
-                onSuccess?.Invoke();
-            }, reason =>
-            {
-                NotifyAuthenticateFailure(reason);
-                onFailure?.Invoke(reason);
-            });
+            Biometric.SetActive(
+                isActive,
+                AllowDeviceCredential,
+                true,
+                () =>
+                {
+                    NotifyAuthenticateSuccess();
+                    onSuccess?.Invoke();
+                }, reason =>
+                {
+                    NotifyAuthenticateFailure(reason);
+                    onFailure?.Invoke(reason);
+                });
         }
 
         internal static void NotifyAuthenticateSuccess()
