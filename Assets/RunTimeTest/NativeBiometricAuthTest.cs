@@ -24,11 +24,11 @@ public class NativeBiometricAuthTest : MonoBehaviour
         yield return null;
         if (!Biometric.IsActive)
         {
-            Biometric.SetActive(true);
+            Biometric.SetActive(true, _toggle.isOn);
         }
         else
         {
-            Biometric.Authenticate(OnSuccess, OnFailure, _toggle.isOn);
+            Biometric.Authenticate(_toggle.isOn, OnSuccess, OnFailure);
         }
         _button.onClick.AddListener(ClickButton);
     }
