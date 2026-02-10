@@ -111,11 +111,15 @@ The UI used for Secret Mode requires the following components:
 
 On Android, this library uses "External Dependency Manager for Unity (EDM4U)" to resolve the [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) dependency.
 
-1. **Install EDM4U**: Run `Window > Native Biometric Auth > Android > Install Google External Dependency Manager`.
+#### 1. **Install EDM4U**
+
+Run `Window > Native Biometric Auth > Android > Install Google External Dependency Manager`.
 
 <img alt="localization" src="Docs/menu_install_edm4u.jpg" width="550"/>
 
-2**Setup**: Open `Setup Guide` from the menu and complete the configuration.
+#### 2. **Setup**
+
+Open `Setup Guide` from the menu and complete the configuration.
 
 <img alt="localization" src="Docs/menu_android_setup_guide.jpg" width="550"/>
 

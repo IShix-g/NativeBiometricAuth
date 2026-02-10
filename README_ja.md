@@ -108,12 +108,15 @@ graph LR
 
 Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) を解決するために「External Dependency Manager for Unity (EDM4U)」を使用します。
 
-1. **EDM4Uのインストール**:
-   `Window > Native Biometric Auth > Android > Install Google External Dependency Manager` を実行します
+#### 1. **EDM4Uのインストール**
+
+`Window > Native Biometric Auth > Android > Install Google External Dependency Manager` を実行します。
 
 <img alt="localization" src="Docs/menu_install_edm4u.jpg" width="550"/>
 
-2. **セットアップ**: メニューの `Setup Guide` を開き、設定を完了させてください
+#### 2. **セットアップ**
+
+メニューの `Setup Guide` を開き、設定を完了させてください。
 
 <img alt="localization" src="Docs/menu_android_setup_guide.jpg" width="550"/>
 
@@ -136,7 +139,7 @@ Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.and
 
 ### 初期化
 
-`s` クラスを使用して初期化を行います。
+`SecretMode` クラスを使用して初期化を行います。
 
 | パラメータ | 説明 | デフォルト値 |
 | --- | --- |--------|
