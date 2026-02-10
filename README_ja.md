@@ -110,8 +110,12 @@ Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.and
 
 1. **EDM4Uのインストール**:
    `Window > Native Biometric Auth > Android > Install Google External Dependency Manager` を実行します
-2. **セットアップ**:
-   メニューの `Setup Guide` を開き、設定を完了させてください
+
+<img alt="localization" src="Docs/menu_install_edm4u.jpg" width="550"/>
+
+2. **セットアップ**: メニューの `Setup Guide` を開き、設定を完了させてください
+
+<img alt="localization" src="Docs/menu_android_setup_guide.jpg" width="550"/>
 
 > [!IMPORTANT]
 > すでにプロジェクトに EDM4U が導入されている場合は、再インストールの必要はありません。
