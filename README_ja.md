@@ -61,8 +61,6 @@ Package Managerの `Native Biometric Auth` 項目から **SecretMode Sample** �
 * **成功**: ロックUIを非表示にし、直前の画面へ復帰。
 * **失敗**: ロック状態を維持。
 
-
-
 ```mermaid
 graph LR
     Start((アプリ起動 / 復帰)) --> ShowLock[ロック画面を表示]
@@ -120,6 +118,10 @@ graph LR
 
 Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) を解決するために「[External Dependency Manager for Unity (EDM4U)](https://github.com/googlesamples/unity-jar-resolver?tab=readme-ov-file#external-dependency-manager-for-unity)」を使用します。
 
+
+> [!IMPORTANT]
+> すでにプロジェクトに EDM4U がインストールされている場合は、必要ありません。
+
 #### 1. **EDM4Uのインストール**
 
 `Window > Native Biometric Auth > Android > Install Google External Dependency Manager` を実行します。
@@ -131,9 +133,6 @@ Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.and
 メニューの `Setup Guide` を開き、設定を完了させてください。
 
 <img alt="localization" src="Docs/menu_android_setup_guide.jpg" width="550"/>
-
-> [!IMPORTANT]
-> すでにプロジェクトに EDM4U が導入されている場合は、再インストールの必要はありません。
 
 ### iOS
 
