@@ -36,7 +36,7 @@ Package Managerの `Native Biometric Auth` 項目から **SecretMode Sample** �
 
 ### 2. サンプルシーンの確認
 
-`Samples/SecretMode Sample/SecretModeTest.unity` を開いて再生してください。
+`Assets/Samples/Native Biometric Auth/1.0.0/SecretMode Sample/SecretModeTest.cs` を開いて再生してください。
 
 * **macOS**: エディタ実行中に生体認証のシミュレーションが可能です。
 * **Android**: 実機テストの前に後述の「Androidの設定」を完了させてください。

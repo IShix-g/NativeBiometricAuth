@@ -39,7 +39,7 @@ In the Package Manager, select the `Native Biometric Auth` package and import th
 
 ### 2. Check the Sample Scene
 
-Open and play `Samples/SecretMode Sample/SecretModeTest.unity`.
+Open and play `Assets/Samples/Native Biometric Auth/1.0.0/SecretMode Sample/SecretModeTest.cs`.
 
 * **macOS**: You can simulate biometric authentication while running in the Editor.
 * **Android**: Before testing on an actual device, please complete the "Android Settings" described below.
