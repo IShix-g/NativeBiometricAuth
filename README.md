@@ -123,10 +123,10 @@ If you need to manually control the lifecycle (e.g., for dynamic resource loadin
 
 On Android, this library uses "[External Dependency Manager for Unity (EDM4U)](https://github.com/googlesamples/unity-jar-resolver?tab=readme-ov-file#external-dependency-manager-for-unity)" to resolve the [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) dependency.
 
+#### 1. **Install EDM4U**
+
 > [!IMPORTANT]
 > If EDM4U is already installed in your project, no further action is required.
-
-#### 1. **Install EDM4U**
 
 Run `Window > Native Biometric Auth > Android > Install Google External Dependency Manager`.
 
