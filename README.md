@@ -91,17 +91,29 @@ Various components are provided to easily toggle Secret Mode on or off.
 > [!TIP]
 > To create your own switching logic, inherit from `SecretModeObserver`.
 
-### Lock UI Configuration
+## Lock UI Setup
 
-The UI used for Secret Mode requires the following components:
+The Secret Mode UI consists of the following components:
 
-* **Overlay**: The main UI displayed during the lock state.
-* **Failure Alert**: An alert UI displayed when authentication fails.
+* **Overlay**: The primary UI displayed while the app is locked.
+* **Failure Alert**: A feedback UI shown when biometric authentication fails.
 
 > [!TIP]
-> If you want to create a completely custom Lock UI, implement the `ISecretModeObject` interface.
+> **Custom Lock UI**
+> To use a custom UI, create a Prefab that implements the `ISecretModeObject` interface and pass it during initialization.
+> Reference Implementation: [TestSecretModeObject.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Samples~/SecretModeTest/TestSecretModeObject.cs)
 
 <img alt="localization" src="Docs/secretModeObject.jpg" width="500"/>
+
+### Lock UI Lifecycle Management
+
+By default, the lock UI Prefab is instantiated during initialization and persists until the application terminates.
+
+If you need to manually control the lifecycle (e.g., for dynamic resource loading or custom pooling), implement the `ISecretModeObjectController` interface and provide it during initialization.
+
+* **Interface Definition**: [ISecretModeObjectController.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/ISecretModeObjectController.cs)
+* **Default Implementation**: [PrefabSecretModeOverlayController.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/PrefabSecretModeOverlayController.cs)
+* *This class handles the standard instantiation and destruction logic.*
 
 ---
 
@@ -109,7 +121,7 @@ The UI used for Secret Mode requires the following components:
 
 ### Android
 
-On Android, this library uses "External Dependency Manager for Unity (EDM4U)" to resolve the [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) dependency.
+On Android, this library uses "[External Dependency Manager for Unity (EDM4U)](https://github.com/googlesamples/unity-jar-resolver?tab=readme-ov-file#external-dependency-manager-for-unity)" to resolve the [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) dependency.
 
 #### 1. **Install EDM4U**
 

@@ -88,17 +88,29 @@ graph LR
 > [!TIP]
 > 独自の切り替えロジックを作成する場合は、`SecretModeObserver` を継承して実装してください。
 
-### ロックUIの設定
+## ロックUIの設定
 
-シークレットモードで使用するUIには、以下のコンポーネントを設定します。
+シークレットモードで使用するUIは、主に以下の2つのコンポーネントで構成されます。
 
-* **Overlay**: ロック中に表示されるメインUI
-* **Failure Alert**: 認証失敗時に表示される警告UI
+* **Overlay**: ロック実行中に前面へ表示されるメインUI。
+* **Failure Alert**: 生体認証に失敗した際に表示されるフィードバック用UI。
 
 > [!TIP]
-> 完全にカスタムしたロックUIを作成する場合は、`ISecretModeObject` インターフェースを実装してください。
+> **独自のロックUIを使用する場合**
+> `ISecretModeObject` インターフェースを実装したPrefabを作成し、初期化時に渡してください。
+> 実装例: [TestSecretModeObject.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Samples~/SecretModeTest/TestSecretModeObject.cs)
 
 <img alt="localization" src="Docs/secretModeObject.jpg" width="500"/>
+
+### ロックUIのライフサイクル管理
+
+デフォルトの挙動では、初期化時にロックUIのPrefabがインスタンス化され、アプリケーションの終了時までメモリ上に保持されます。
+
+リソースの動的ロードや独自のプール管理など、**インスタンスのライフサイクルを任意に制御したい場合**は、`ISecretModeObjectController` を実装して初期化時に注入してください。
+
+* **インターフェース定義**: [ISecretModeObjectController.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/ISecretModeObjectController.cs)
+* **標準実装（参考）**: [PrefabSecretModeOverlayController.cs](https://github.com/IShix-g/NativeBiometricAuth/blob/main/Packages/com.ishix.nativebiometricauth/Runtime/Scripts/Public/SecretMode/PrefabSecretModeOverlayController.cs)
+* *デフォルトではこのクラスがPrefabの生成・破棄を管理しています。*
 
 ---
 
@@ -106,7 +118,7 @@ graph LR
 
 ### Android
 
-Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) を解決するために「External Dependency Manager for Unity (EDM4U)」を使用します。
+Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.android.com/jetpack/androidx/releases/biometric) を解決するために「[External Dependency Manager for Unity (EDM4U)](https://github.com/googlesamples/unity-jar-resolver?tab=readme-ov-file#external-dependency-manager-for-unity)」を使用します。
 
 #### 1. **EDM4Uのインストール**
 
