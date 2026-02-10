@@ -121,7 +121,7 @@ Androidでは、依存ライブラリ [AndroidX Biometric](https://developer.and
 #### 1. **EDM4Uのインストール**
 
 > [!IMPORTANT]
-> すでにプロジェクトにインストールされている場合は、インストールする必要はありません。
+> すでにプロジェクトにインストールされている場合は、インストールの必要はありません。
 
 `Window > Native Biometric Auth > Android > Install Google External Dependency Manager` を実行します。
 
