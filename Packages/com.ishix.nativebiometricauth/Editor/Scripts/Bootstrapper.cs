@@ -28,8 +28,6 @@ namespace NativeBiometricAuth.Editor
         {
 #if !ENABLE_EDM4U
             Edm4UInstaller.PromptInstallIfNeeded();
-#else
-            Edm4UInstaller.UpdateIfNeeded();
 #endif
             BiometricSettings.LoadOrCreate();
         }
