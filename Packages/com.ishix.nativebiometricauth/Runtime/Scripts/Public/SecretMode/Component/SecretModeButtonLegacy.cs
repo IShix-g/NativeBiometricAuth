@@ -6,7 +6,6 @@ using UnityEngine.UI;
 namespace NativeBiometricAuth
 {
     [AddComponentMenu("Native Biometric Auth/Secret Mode Button (Legacy)")]
-    [RequireComponent(typeof(Text))]
     internal sealed class SecretModeButtonLegacy : SecretModeButtonBase
     {
         [SerializeField] Text _text;
@@ -21,7 +20,7 @@ namespace NativeBiometricAuth
         protected override void Reset()
         {
             base.Reset();
-            _text = GetComponent<Text>();
+            _text = GetComponentInChildren<Text>();
         }
     }
 }

@@ -7,7 +7,6 @@ using TMPro;
 namespace NativeBiometricAuth
 {
     [AddComponentMenu("Native Biometric Auth/Secret Mode Button")]
-    [RequireComponent(typeof(Text))]
     internal sealed class SecretModeButton : SecretModeButtonBase
     {
         [SerializeField] TextMeshProUGUI _text;
@@ -22,7 +21,7 @@ namespace NativeBiometricAuth
         protected override void Reset()
         {
             base.Reset();
-            _text = GetComponent<TextMeshProUGUI>();
+            _text = GetComponentInChildren<TextMeshProUGUI>();
         }
     }
 }
