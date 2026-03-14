@@ -1,6 +1,6 @@
 {
   "name": "com.ishix.nativebiometricauth",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "Native Biometric Auth",
   "description": "Native biometric authentication (FaceID, TouchID, Fingerprint) for Unity. Easily implement 'Secret Mode' for enhanced privacy protection.",
   "unity": "2022.3",
