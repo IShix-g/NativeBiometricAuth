@@ -11,7 +11,7 @@ permissions:
 jobs:
   check-statuses:
     name: Check Status (${{ matrix.workflow_id }})
-    uses: IShix-g/Unity-GitHubActions/.github/workflows/reusable-check-last-run-status-age.yaml@v1
+    uses: IShix-g/Unity-GitHubActions/.github/workflows/reusable-check-last-run-status-age.yaml@main
     with:
       workflow-id: ${{ matrix.workflow_id }}
       min-day: 1
